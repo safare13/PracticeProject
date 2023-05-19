@@ -32,7 +32,7 @@ public void startTest()throws Throwable
 			//store corresponding sheet into variable
 			String TCModule =xl.getCellData("MasterTestCases", i, 1);
 			//define path of ExtentReport
-			report = new ExtentReports("./target/Reports/"+TCModule+"_"+FunctionLibrary.generateDate()+".html");
+			report = new ExtentReports("./Reports/target"+TCModule+"_"+FunctionLibrary.generateDate()+".html");
 			//start test case here
 			test= report.startTest(TCModule);
 			//iterate all rows in TCModule sheet
@@ -99,6 +99,14 @@ public void startTest()throws Throwable
 					else if(ObjectType.equalsIgnoreCase("supplierTable"))
 					{
 						FunctionLibrary.supplierTable(driver);
+						test.log(LogStatus.INFO, Description);
+					}
+					else if(ObjectType.equalsIgnoreCase("captureCnumber")) {
+						FunctionLibrary.captureCnumber(driver, LocatorType, LocatorValue);
+						test.log(LogStatus.INFO, Description);
+					}
+					else if(ObjectType.equalsIgnoreCase("customerTable")) {
+						FunctionLibrary.customerTable(driver);
 						test.log(LogStatus.INFO, Description);
 					}
 					//write as pass into status cell TCModule

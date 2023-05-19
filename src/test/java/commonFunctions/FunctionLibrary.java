@@ -160,6 +160,24 @@ public static void typeAction(WebDriver driver,String LocatorType,String Locator
 				Assert.assertEquals(Expected, Actual, "Supplier Number Not Matching");
 		
 	}
+	//method for capture snumber
+		public static void captureCnumber(WebDriver driver,String LocatorType,String LocatorValue)
+		{
+			Expected =driver.findElement(By.name(LocatorValue)).getAttribute("value");
+			
+		}
+	public static void customerTable(WebDriver driver) throws Throwable{
+		//if searh textbox already displayed no need to click search panel
+		if(!driver.findElement(By.xpath(conpro.getProperty("search-textbox"))).isDisplayed())
+			driver.findElement(By.xpath(conpro.getProperty("search-panel"))).click();
+		driver.findElement(By.xpath(conpro.getProperty("search-textbox"))).sendKeys(Expected);
+		Thread.sleep(3000);
+		driver.findElement(By.xpath(conpro.getProperty("search-button"))).click();
+		Thread.sleep(3000);
+		Actual =driver.findElement(By.xpath("//table[@id='tbl_a_customerslist']/tbody/tr[1]/td[5]/div/span/span")).getText()	;	
+		System.out.println(Expected+"     "+Actual);
+		Assert.assertEquals(Expected, Actual, "Customer Number Not Matching");
+	}
 	//method for date generate
 	public static String generateDate()
 	{
